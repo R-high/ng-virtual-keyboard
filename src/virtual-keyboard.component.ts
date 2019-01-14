@@ -21,6 +21,7 @@ import { KeyPressInterface } from './key-press.interface';
             matInput
             #keyboardInput
             (click)="updateCaretPosition()"
+            disabled 
             readonly 
             [(ngModel)]="inputElement.nativeElement.value" placeholder="{{ placeholder }}"
             [maxLength]="maxLength"
