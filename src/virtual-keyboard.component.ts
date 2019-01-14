@@ -23,6 +23,7 @@ import { KeyPressInterface } from './key-press.interface';
             (click)="updateCaretPosition()"
             [disabled]="disabled" 
             readonly 
+            tabindex="-1"
             [(ngModel)]="inputElement.nativeElement.value" placeholder="{{ placeholder }}"
             [maxLength]="maxLength"
           />
@@ -129,7 +130,7 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
    */
   public ngOnInit(): void {
     setTimeout(() => {
-      this.keyboardInput.nativeElement.focus();
+      // this.keyboardInput.nativeElement.focus();
     }, 0);
 
     this.virtualKeyboardService.shift$.subscribe((shift: boolean) => {
