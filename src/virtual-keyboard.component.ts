@@ -95,7 +95,7 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
     end: number
   ): void {
     if (input.setSelectionRange) {
-      input.focus();
+      // input.focus();
       input.setSelectionRange(start, end);
 
     } else if (input.createTextRange) {
@@ -281,7 +281,7 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
         }
 
         // Set focus to keyboard input
-        this.keyboardInput.nativeElement.focus();
+        // this.keyboardInput.nativeElement.focus();
         break;
       case 'CapsLock':
         this.virtualKeyboardService.toggleCapsLock();
@@ -319,6 +319,6 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
     this.inputElement.nativeElement.dispatchEvent(new KeyboardEvent('keyup', eventInit));
 
     // And set focus to input
-    this.keyboardInput.nativeElement.focus();
+    // this.keyboardInput.nativeElement.focus();
   }
 }
