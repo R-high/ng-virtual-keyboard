@@ -145,13 +145,13 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
       this.layout = keyboardCapsLockLayout(this.layout, capsLock);
     });
 
-    this.virtualKeyboardService.caretPosition$.subscribe((caretPosition: number) => {
-      this.caretPosition = caretPosition;
+    // this.virtualKeyboardService.caretPosition$.subscribe((caretPosition: number) => {
+    //   this.caretPosition = caretPosition;
 
-      setTimeout(() => {
-        VirtualKeyboardComponent.setSelectionRange(this.keyboardInput.nativeElement, caretPosition, caretPosition);
-      }, 0);
-    });
+    //   setTimeout(() => {
+    //     VirtualKeyboardComponent.setSelectionRange(this.keyboardInput.nativeElement, caretPosition, caretPosition);
+    //   }, 0);
+    // });
 
     if (this.inputElement.nativeElement.value.length) {
       this.virtualKeyboardService.setCaretPosition(this.inputElement.nativeElement.value.length);
