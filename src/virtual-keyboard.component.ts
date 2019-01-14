@@ -20,7 +20,6 @@ import { KeyPressInterface } from './key-press.interface';
           <input type="{{type}}"
             matInput
             #keyboardInput
-            (click)="updateCaretPosition()"
             [disabled]="isDisabled()"
             readonly
             tabindex="-1"
