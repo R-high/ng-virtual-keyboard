@@ -20,7 +20,7 @@ import { KeyPressInterface } from './key-press.interface';
           <input type="{{type}}"
             matInput
             #keyboardInput
-            [disabled]="inputDisabled"
+            disabled
             readonly
             tabindex="-1"
             [(ngModel)]="inputElement.nativeElement.value" placeholder="{{ placeholder }}"
@@ -76,7 +76,7 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
   public placeholder: string;
   public type: string;
   public disabled: boolean;
-  public inputDisabled: boolean = true;
+  public inputDisabled: boolean;
   public maxLength: number | string;
 
   private caretPosition: number;
