@@ -158,7 +158,7 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
     }
 
     this.maxLength = this.inputElement.nativeElement.maxLength > 0 ? this.inputElement.nativeElement.maxLength : '';
-
+    this.inputDisabled = true;
     this.checkDisabled();
   }
 
