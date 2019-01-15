@@ -20,7 +20,6 @@ import { KeyPressInterface } from './key-press.interface';
           <input type="{{type}}"
             matInput
             #keyboardInput
-            (click)="updateCaretPosition()"
             [disabled]="inputDisabled"
             readonly
             tabindex="-1"
@@ -153,9 +152,9 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
     //   }, 0);
     // });
 
-    if (this.inputElement.nativeElement.value.length) {
-      this.virtualKeyboardService.setCaretPosition(this.inputElement.nativeElement.value.length);
-    }
+    // if (this.inputElement.nativeElement.value.length) {
+    //   this.virtualKeyboardService.setCaretPosition(this.inputElement.nativeElement.value.length);
+    // }
 
     this.maxLength = this.inputElement.nativeElement.maxLength > 0 ? this.inputElement.nativeElement.maxLength : '';
     this.inputDisabled = true;
@@ -180,13 +179,6 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
    */
   public close(): void {
     this.dialogRef.close();
-  }
-
-  /**
-   * Method to update caret position. This is called on click event in virtual keyboard input element.
-   */
-  public updateCaretPosition(): void {
-    this.virtualKeyboardService.setCaretPosition(this.keyboardInput.nativeElement.selectionStart);
   }
 
   /**
@@ -233,22 +225,7 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
    */
   private handleNormalKey(keyValue: string): void {
     let value = '';
-
-    // We have caret position, so attach character to specified position
-    if (!isNaN(this.caretPosition)) {
-      value = [
-        this.inputElement.nativeElement.value.slice(0, this.caretPosition),
-        keyValue,
-        this.inputElement.nativeElement.value.slice(this.caretPosition)
-      ].join('');
-
-      // Update caret position
-      this.virtualKeyboardService.setCaretPosition(this.caretPosition + 1);
-    } else {
-      value = `${this.inputElement.nativeElement.value}${keyValue}`;
-    }
-
-    // And finally set new value to input
+    value = `${this.inputElement.nativeElement.value}${keyValue}`;
     this.inputElement.nativeElement.value = value;
   }
 
@@ -271,22 +248,7 @@ export class VirtualKeyboardComponent implements OnInit, OnDestroy {
         break;
       case 'Backspace':
         const currentValue = this.inputElement.nativeElement.value;
-
-        // We have a caret position, so we need to remove char from that position
-        if (!isNaN(this.caretPosition)) {
-          // And current position must > 0
-          if (this.caretPosition > 0) {
-            const start = currentValue.slice(0, this.caretPosition - 1);
-            const end = currentValue.slice(this.caretPosition);
-
-            this.inputElement.nativeElement.value = `${start}${end}`;
-
-            // Update caret position
-            this.virtualKeyboardService.setCaretPosition(this.caretPosition - 1);
-          }
-        } else {
-          this.inputElement.nativeElement.value = currentValue.substring(0, currentValue.length - 1);
-        }
+        this.inputElement.nativeElement.value = currentValue.substring(0, currentValue.length - 1);
 
         // Set focus to keyboard input
         // this.keyboardInput.nativeElement.focus();
